@@ -1,4 +1,6 @@
-﻿namespace BlazorApp1.Tests;
+﻿using Xunit;
+
+namespace BlazorApp1.Tests;
 
 public class UnitTest1
 {

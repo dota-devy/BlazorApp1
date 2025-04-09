@@ -5,13 +5,16 @@
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
     <UserSecretsId>994895dd-f2ab-4b08-8281-92714361bb7f</UserSecretsId>
+    <GenerateAssemblyInfo>false</GenerateAssemblyInfo> <!-- Disable automatic assembly info generation -->
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Fido2" Version="3.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.3.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="9.0.4" />
+    <PackageReference Include="Mongo2Go" Version="4.1.0" />
     <PackageReference Include="MongoDB.Driver" Version="3.3.0" />
+    <PackageReference Include="xunit" Version="2.9.3" />
   </ItemGroup>
 
 </Project>
