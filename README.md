@@ -29,3 +29,26 @@ The project follows a standard Blazor application structure:
    ```bash
    git clone <repository-url>
    cd BlazorApp1
+   ```
+
+2. Restore dependencies:
+   ```bash
+   dotnet restore
+   ```
+
+3. Build the solution:
+   ```bash
+   dotnet build
+   ```
+
+4. Run the application:
+   ```bash
+   dotnet run
+   ```
+
+5. Open your browser and navigate to:
+   ```
+   https://localhost:5001
+   ```
+
+Let me know if you need further modifications!
