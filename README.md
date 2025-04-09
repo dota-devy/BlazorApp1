@@ -53,10 +53,48 @@ The project follows a standard Blazor application structure:
 
 ## Setting Up MongoDB Connection String with Secrets Manager
 
-To securely store the MongoDB connection string, use the .NET Secrets Manager. Follow these steps:
+To securely store your MongoDB connection string, use the .NET Secrets Manager. Follow these steps:
 
-1. **Initialize the Secrets Manager**:
+1. **Initialize the Secrets Manager**  
    Navigate to the project directory and initialize the secrets manager (if not already done):
    ```bash
    dotnet user-secrets init
    ```
+
+2. **Add the MongoDB Connection String**  
+   Use the following command to add your MongoDB connection string to the secrets manager:
+   ```bash
+   dotnet user-secrets set "MongoDB:ConnectionString" "mongodb+srv://<username>:<password>@<cluster-url>/?retryWrites=true&w=majority&appName=<app-name>"
+   ```
+   Replace the placeholders:
+   - `<username>`: Your MongoDB username.
+   - `<password>`: Your MongoDB password.
+   - `<cluster-url>`: Your MongoDB cluster URL.
+   - `<app-name>`: The name of your application.
+
+   Example:
+   ```bash
+   dotnet user-secrets set "MongoDB:ConnectionString" "mongodb+srv://devlin:hcKaE6UCYvBHx8xQ@devlinscluster0.vdvh29y.mongodb.net/?retryWrites=true&w=majority&appName=DevlinsCluster0"
+   ```
+
+3. **Verify the Secrets**  
+   To confirm that the connection string has been added, run:
+   ```bash
+   dotnet user-secrets list
+   ```
+   You should see:
+   ```
+   MongoDB:ConnectionString = mongodb+srv://<username>:<password>@<cluster-url>/?retryWrites=true&w=majority&appName=<app-name>
+   ```
+
+4. **Ensure Your Application Uses the Secrets Manager**  
+   The application is already configured to retrieve the connection string from the secrets manager in `Program.cs`:
+   ```csharp
+   builder.Services.Configure<MongoDbSettings>(options =>
+   {
+       options.ConnectionString = builder.Configuration["MongoDB:ConnectionString"];
+       options.DatabaseName = builder.Configuration["MongoDB:DatabaseName"];
+   });
+   ```
+
+By following these steps, your MongoDB connection string will be securely stored and retrieved at runtime without exposing it in your source code.
