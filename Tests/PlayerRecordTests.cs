@@ -60,7 +60,7 @@ namespace BlazorApp1.Tests
             Assert.Equal(2, results.Count);
         }
 
-        public void Dispose()
+        protected void Dispose()
         {
             _runner.Dispose();
         }

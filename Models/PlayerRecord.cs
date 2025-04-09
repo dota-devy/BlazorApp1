@@ -8,10 +8,10 @@ namespace BlazorApp1.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public string Id { get; set; } // MongoDB ObjectId as a string
+        public required string Id { get; set; } // MongoDB ObjectId as a string
 
         [BsonElement("name")]
-        public string Name { get; set; } // Player's name
+        public required string Name { get; set; } // Player's name
 
         [BsonElement("cash")]
         public decimal Cash { get; set; } // Cash in dollars
