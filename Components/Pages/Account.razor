@@ -1,0 +1,56 @@
+@page "/account"
+<PageTitle>Account</PageTitle>
+
+<h3>Account</h3>
+
+<p>Welcome to the Account page!</p>
+
+<!-- Add Login Button -->
+<button class="btn btn-primary" @onclick="Login">Login</button>
+
+@code {
+    private async Task Login()
+    {
+        try
+        {
+            // Simulate checking for a passkey
+            var hasPasskey = await CheckForPasskeyAsync();
+
+            if (hasPasskey)
+            {
+                // Attempt passkey authentication
+                var isAuthenticated = await AuthenticateWithPasskeyAsync();
+
+                if (isAuthenticated)
+                {
+                    Console.WriteLine("Passkey authentication successful!");
+                }
+                else
+                {
+                    Console.WriteLine("Passkey authentication failed.");
+                }
+            }
+            else
+            {
+                Console.WriteLine("No passkey found. Redirecting to alternative login...");
+                // Redirect to alternative login flow
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"An error occurred during login: {ex.Message}");
+        }
+    }
+
+    private Task<bool> CheckForPasskeyAsync()
+    {
+        // Simulate checking for a passkey (replace with actual logic)
+        return Task.FromResult(true); // Assume a passkey exists for demonstration
+    }
+
+    private Task<bool> AuthenticateWithPasskeyAsync()
+    {
+        // Simulate passkey authentication (replace with actual logic)
+        return Task.FromResult(true); // Assume authentication is successful for demonstration
+    }
+}

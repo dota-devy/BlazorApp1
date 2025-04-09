@@ -1,0 +1,52 @@
+# Ignore build outputs
+bin/
+obj/
+
+# Ignore user-specific files
+*.user
+*.suo
+*.userosscache
+*.sln.docstates
+
+# Ignore Visual Studio Code settings
+.vscode/
+
+# Ignore Rider settings
+.idea/
+
+# Ignore logs
+*.log
+
+# Ignore temporary files
+*.tmp
+*.temp
+*.cache
+*.bak
+*.swp
+
+# Ignore publish outputs
+wwwroot/
+
+# Ignore dependency caches
+node_modules/
+*.nuget/
+
+# Ignore generated files
+*.g.*
+*.generated.cs
+*.razor.g.cs
+*.razor.g.i.cs
+
+# Ignore configuration files
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.json
+
+# Ignore static web assets
+**/staticwebassets.build.json
+**/staticwebassets.runtime.json
+**/staticwebassets.development.json
+
+# Ignore scoped CSS files
+**/*.bundle.scp.css
+**/*.rz.scp.css
