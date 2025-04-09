@@ -1,5 +1,7 @@
 using BlazorApp1.Components;
+using BlazorApp1.Services;
 using Fido2NetLib;
+using Microsoft.Extensions.Options;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,7 +20,21 @@ builder.Services.AddSingleton<Fido2>(new Fido2(new Fido2Configuration
     TimestampDriftTolerance = TimeSpan.FromMinutes(5).Seconds
 }));
 
+// Configure MongoDB
+builder.Services.Configure<MongoDbSettings>(options =>
+{
+    // Retrieve the connection string from the secrets manager
+    options.ConnectionString = builder.Configuration["MongoDB:ConnectionString"] ?? throw new InvalidOperationException("MongoDB:ConnectionString is not configured.");
+    options.DatabaseName = builder.Configuration["MongoDB:DatabaseName"] ?? throw new InvalidOperationException("MongoDB:DatabaseName is not configured.");
+});
+builder.Services.AddSingleton<MongoDbService>();
+
 var app = builder.Build();
+
+// Configure mongo serv
+var mongoDbService = app.Services.GetRequiredService<MongoDbService>();
+Console.WriteLine("Connected to MongoDB database.");
+
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

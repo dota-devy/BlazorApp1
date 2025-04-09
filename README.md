@@ -51,4 +51,12 @@ The project follows a standard Blazor application structure:
    https://localhost:5001
    ```
 
-Let me know if you need further modifications!
+## Setting Up MongoDB Connection String with Secrets Manager
+
+To securely store the MongoDB connection string, use the .NET Secrets Manager. Follow these steps:
+
+1. **Initialize the Secrets Manager**:
+   Navigate to the project directory and initialize the secrets manager (if not already done):
+   ```bash
+   dotnet user-secrets init
+   ```
