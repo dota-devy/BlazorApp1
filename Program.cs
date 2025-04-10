@@ -9,6 +9,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
 
+// Read secrets from Secrets Manager
+builder.Configuration.AddUserSecrets<Program>();
+
 // Read ServerName from configuration
 var serverName = builder.Configuration["AppSettings:ServerName"];
 
@@ -20,21 +23,28 @@ builder.Services.AddSingleton<Fido2>(new Fido2(new Fido2Configuration
     TimestampDriftTolerance = TimeSpan.FromMinutes(5).Seconds
 }));
 
-// Configure MongoDB
+// Configure MongoDB settings from Secrets Manager
 builder.Services.Configure<MongoDbSettings>(options =>
 {
-    // Retrieve the connection string from the secrets manager
-    options.ConnectionString = builder.Configuration["MongoDB:ConnectionString"] ?? throw new InvalidOperationException("MongoDB:ConnectionString is not configured.");
-    options.DatabaseName = builder.Configuration["MongoDB:DatabaseName"] ?? throw new InvalidOperationException("MongoDB:DatabaseName is not configured.");
+    options.ConnectionString = builder.Configuration["MongoDB:ConnectionString"]
+        ?? Environment.GetEnvironmentVariable("MongoDB_ConnectionString")
+        ?? throw new InvalidOperationException("MongoDB:ConnectionString is not configured.");
+    options.DatabaseName = builder.Configuration["MongoDB:DatabaseName"]
+        ?? Environment.GetEnvironmentVariable("MongoDB_DatabaseName")
+        ?? throw new InvalidOperationException("MongoDB:DatabaseName is not configured.");
 });
+
+// Register MongoDbService
 builder.Services.AddSingleton<MongoDbService>();
 
 var app = builder.Build();
 
-// Configure mongo serv
-var mongoDbService = app.Services.GetRequiredService<MongoDbService>();
-Console.WriteLine("Connected to MongoDB database.");
-
+// Test MongoDB connection on startup
+if (app.Environment.IsDevelopment())
+{
+    var mongoDbService = app.Services.GetRequiredService<MongoDbService>();
+    Console.WriteLine("Connected to MongoDB database.");
+}
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

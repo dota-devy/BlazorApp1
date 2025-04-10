@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <IsPackable>false</IsPackable>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo> <!-- Disable automatic assembly info generation -->
+    <UserSecretsId>e38ec6b8-cf91-41c3-9b3c-cb7b6fd57bde</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>

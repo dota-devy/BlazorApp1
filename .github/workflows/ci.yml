@@ -29,3 +29,6 @@ jobs:
 
     - name: Run tests
       run: dotnet test --no-build --verbosity normal
+      env:
+        MongoDB_DatabaseName: ${{ secrets.MONGODB_DATABASENAME }}
+        MongoDB_ConnectionString: ${{ secrets.MONGODB_CONNECTIONSTRING }}

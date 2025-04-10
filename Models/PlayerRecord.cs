@@ -8,7 +8,7 @@ namespace BlazorApp1.Models
     {
         [BsonId]
         [BsonRepresentation(BsonType.ObjectId)]
-        public required string Id { get; set; } // MongoDB ObjectId as a string
+        public string Id { get; set; } = ObjectId.GenerateNewId().ToString(); // Default value for Id
 
         [BsonElement("name")]
         public required string Name { get; set; } // Player's name
