@@ -74,7 +74,7 @@ To securely store your MongoDB connection string, use the .NET Secrets Manager. 
 
    Example:
    ```bash
-   dotnet user-secrets set "MongoDB:ConnectionString" "mongodb+srv://devlin:hcKaE6UCYvBHx8xQ@devlinscluster0.vdvh29y.mongodb.net/?retryWrites=true&w=majority&appName=DevlinsCluster0"
+   dotnet user-secrets set "MongoDB:ConnectionString" "mongodb+srv://username:verysecuresecret@devlinsclusterheadache.mongodb.net/?retryWrites=true&w=majority&appName=DevlinsCluster0"
    ```
 
 3. **Verify the Secrets**  
